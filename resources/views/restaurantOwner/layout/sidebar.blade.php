@@ -119,7 +119,7 @@
 
             <ul class="menu-sub">
                 <li class="menu-item">
-                    <a href="{{ route('admin.restaurants.index') }}" class="menu-link">
+                    <a href="{{ route('restaurant.food-categories.index') }}" class="menu-link">
                         <div class="text-truncate" data-i18n="Without menu">Food Categories</div>
                     </a>
                 </li>

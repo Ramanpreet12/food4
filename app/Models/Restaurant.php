@@ -32,4 +32,11 @@ class Restaurant extends Authenticatable
     {
         return 'email';
     }
+
+    public function foodCategories()
+{
+    return $this->hasMany(FoodCategory::class);
+}
+
+
 }

@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\DeliveryController;
 use App\Http\Controllers\Backend\CustomerController;
 use App\Http\Controllers\Backend\RestaurantController;
+use App\Http\Controllers\Backend\FoodCategoryController;
 use Illuminate\Support\Facades\Route;
 
 // Public homepage only
@@ -57,6 +58,9 @@ Route::middleware(['auth:restaurant', 'restaurant'])->group(function () {
         Route::get('/dashboard', [RestaurantController::class, 'dashboard'])->name('dashboard');
         Route::get('/profile', [RestaurantController::class, 'profile'])->name('profile');
         Route::post('/logout', [RestaurantController::class, 'logout'])->name('logout');
+
+        //Menu Management
+        Route::resource('food-categories', FoodCategoryController::class);
     });
 });
 

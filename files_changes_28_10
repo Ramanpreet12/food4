@@ -1,4 +1,4 @@
-# changes for restraunt delete with swal and filter UI for admin
+# 1.changes for restraunt delete with swal and filter UI for admin
 #       modified:   app/Http/Controllers/Backend/RestaurantController.php
 #       modified:   app/Models/Restaurant.php
 #       modified:   database/migrations/2024_10_21_175036_create_restaurants_table.php
@@ -9,7 +9,7 @@
 #       public/backend/
 #       custom.js
 
-# restaurant dashboard setup
+# 2. restaurant dashboard setup
 #     modified:   app/Http/Controllers/Backend/RestaurantController.php
 #         deleted:    resources/views/admin/restaurant/auth/login.blade.php
 #         deleted:    resources/views/admin/restaurant/create.blade.php
@@ -22,3 +22,17 @@
 #   (use "git add <file>..." to include in what will be committed)
 #         resources/views/admin/restaurants/
 #         resources/views/restaurantOwner/
+
+
+
+# 3.  Food Category created.
+#      modified:   app/Models/Restaurant.php
+#         modified:   resources/views/restaurantOwner/layout/sidebar.blade.php
+#         modified:   routes/web.php
+
+#  Untracked files:
+#   (use "git add <file>..." to include in what will be committed)
+#         app/Http/Controllers/Backend/FoodCategoryController.php
+#         app/Models/FoodCategory.php
+#         database/migrations/2024_10_28_095113_create_food_categories_table.php
+#         resources/views/restaurantOwner/foodCategory/

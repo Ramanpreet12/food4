@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 27, 2024 at 08:05 PM
--- Server version: 8.3.0
--- PHP Version: 8.2.18
+-- Generation Time: Oct 28, 2024 at 12:22 PM
+-- Server version: 8.2.0
+-- PHP Version: 8.2.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `speedie_app`
+-- Database: `food`
 --
 
 -- --------------------------------------------------------
@@ -78,15 +78,7 @@ CREATE TABLE IF NOT EXISTS `delivery_boys` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `delivery_boys_email_unique` (`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `delivery_boys`
---
-
-INSERT INTO `delivery_boys` (`id`, `role`, `name`, `email`, `password`, `phone`, `altNumber`, `gender`, `adhar`, `image`, `drivingLicence`, `deliveryBoyType`, `locationId`, `vehicle_type`, `vehicle_number`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'delivery_boy', 'delivery', 'delivery@gmail.com', '$2y$12$rt3wudVC10InG.ivJmacZ.xmWgq2AxqAfyLGmioIaPM4qKspKqFri', '09321912739', NULL, 'male', '3243243243', '1730019692_671e016c4c64b.jpg', '4324324', 'restaurantDeliveryBoy', '432432', NULL, NULL, 'pending', NULL, '2024-10-27 03:31:32', '2024-10-27 03:31:32'),
-(2, 'delivery_boy', 'delivery', 'delivery1@gmail.com', '$2y$12$gC4q3sozoQG42lqNgFL04.z/zXocdaKGZanyIboceMvCtxid/87bm', '09321912777', NULL, 'male', '3243243243', '1730019818_671e01eac6a43.jpg', '4324324', 'restaurantDeliveryBoy', '432432', NULL, NULL, 'pending', NULL, '2024-10-27 03:33:39', '2024-10-27 03:33:39');
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -106,6 +98,34 @@ CREATE TABLE IF NOT EXISTS `failed_jobs` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `food_categories`
+--
+
+DROP TABLE IF EXISTS `food_categories`;
+CREATE TABLE IF NOT EXISTS `food_categories` (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  `restaurant_id` bigint UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `food_categories_restaurant_id_foreign` (`restaurant_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `food_categories`
+--
+
+INSERT INTO `food_categories` (`id`, `name`, `image`, `status`, `restaurant_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'wraps', '1730117718_671f8056ee925.jpg', 1, 1, '2024-10-28 05:10:52', '2024-10-28 06:49:34', '2024-10-28 06:49:34'),
+(2, 'Pizza', '1730117779_671f809372756.jpg', 1, 2, '2024-10-28 06:09:43', '2024-10-28 06:46:37', NULL);
 
 -- --------------------------------------------------------
 
@@ -159,24 +179,25 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   `migration` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `migrations`
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(7, '0001_01_01_000000_create_users_table', 1),
-(8, '0001_01_01_000001_create_cache_table', 1),
-(9, '0001_01_01_000002_create_jobs_table', 1),
-(10, '2024_10_18_175417_create_personal_access_tokens_table', 1),
-(11, '2024_10_21_175036_create_restaurants_table', 1),
-(12, '2024_10_24_164933_create_delivery_boys_table', 1),
-(13, '2024_10_25_192450_create_oauth_auth_codes_table', 1),
-(14, '2024_10_25_192451_create_oauth_access_tokens_table', 1),
-(15, '2024_10_25_192452_create_oauth_refresh_tokens_table', 1),
-(16, '2024_10_25_192453_create_oauth_clients_table', 1),
-(17, '2024_10_25_192454_create_oauth_personal_access_clients_table', 1);
+(1, '0001_01_01_000000_create_users_table', 1),
+(2, '0001_01_01_000001_create_cache_table', 1),
+(3, '0001_01_01_000002_create_jobs_table', 1),
+(4, '2024_10_18_175417_create_personal_access_tokens_table', 1),
+(5, '2024_10_21_175036_create_restaurants_table', 1),
+(6, '2024_10_24_164933_create_delivery_boys_table', 1),
+(7, '2024_10_25_192450_create_oauth_auth_codes_table', 1),
+(8, '2024_10_25_192451_create_oauth_access_tokens_table', 1),
+(9, '2024_10_25_192452_create_oauth_refresh_tokens_table', 1),
+(10, '2024_10_25_192453_create_oauth_clients_table', 1),
+(11, '2024_10_25_192454_create_oauth_personal_access_clients_table', 1),
+(12, '2024_10_28_095113_create_food_categories_table', 2);
 
 -- --------------------------------------------------------
 
@@ -198,13 +219,6 @@ CREATE TABLE IF NOT EXISTS `oauth_access_tokens` (
   PRIMARY KEY (`id`),
   KEY `oauth_access_tokens_user_id_index` (`user_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `oauth_access_tokens`
---
-
-INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes`, `revoked`, `created_at`, `updated_at`, `expires_at`) VALUES
-('2cfc08ec96ae7b54d95602f9317d12ea59ee3e40d98823c41d6ba0e0b7995a63c29b1f0371411dac', 1, 1, 'DeliveryToken', '[\"delivery-access\"]', 0, '2024-10-27 13:34:59', '2024-10-27 13:34:59', '2025-10-27 19:04:59');
 
 -- --------------------------------------------------------
 
@@ -245,15 +259,7 @@ CREATE TABLE IF NOT EXISTS `oauth_clients` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `oauth_clients_user_id_index` (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `oauth_clients`
---
-
-INSERT INTO `oauth_clients` (`id`, `user_id`, `name`, `secret`, `provider`, `redirect`, `personal_access_client`, `password_client`, `revoked`, `created_at`, `updated_at`) VALUES
-(1, NULL, 'Laravel Personal Access Client', 'ZlxvJUAvTduXzE24e2WNANNEKL1OiyCcVhlxeJdl', NULL, 'http://localhost', 1, 0, 0, '2024-10-25 13:55:42', '2024-10-25 13:55:42'),
-(2, NULL, 'Laravel Password Grant Client', 'LTNl6fkvkX6zfw9zsWfxNWak4AVNRJlxiayFmmRh', 'users', 'http://localhost', 0, 1, 0, '2024-10-25 13:55:42', '2024-10-25 13:55:42');
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -268,14 +274,7 @@ CREATE TABLE IF NOT EXISTS `oauth_personal_access_clients` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `oauth_personal_access_clients`
---
-
-INSERT INTO `oauth_personal_access_clients` (`id`, `client_id`, `created_at`, `updated_at`) VALUES
-(1, 1, '2024-10-25 13:55:42', '2024-10-25 13:55:42');
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -342,7 +341,9 @@ CREATE TABLE IF NOT EXISTS `restaurants` (
   `role` enum('restaurant_owner') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'restaurant_owner',
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `speciality` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `speciality` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` enum('subscription_based','self') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `priority` enum('high','medium','low') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `logo` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `address` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `city` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -369,27 +370,29 @@ CREATE TABLE IF NOT EXISTS `restaurants` (
   `delivery_on_off` enum('on','off') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'off',
   `restaurant_images` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `featured_image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` enum('active','inactive','block') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'inactive',
+  `status` enum('active','inactive','block') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'inactive',
   `featured` tinyint(1) NOT NULL DEFAULT '0',
   `tax_gst_number` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `fssai_number` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `bank_holder_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `ifsc_code` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `bank_account_number` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fssai_number` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `bank_holder_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ifsc_code` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `bank_account_number` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `restaurants_email_unique` (`email`),
   UNIQUE KEY `restaurants_owner_email_unique` (`owner_email`),
   UNIQUE KEY `restaurants_password_unique` (`password`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `restaurants`
 --
 
-INSERT INTO `restaurants` (`id`, `role`, `name`, `description`, `speciality`, `logo`, `address`, `city`, `state`, `postal_code`, `country`, `latitude`, `longitude`, `delivery_radius`, `phone`, `secondary_phone`, `email`, `password`, `website`, `opening_time`, `closing_time`, `days_of_operation`, `owner_name`, `owner_contact_number`, `owner_email`, `average_cost_for_per_person`, `delivery_fee`, `delivery_time`, `delivery_on_off`, `restaurant_images`, `featured_image`, `status`, `featured`, `tax_gst_number`, `fssai_number`, `bank_holder_name`, `ifsc_code`, `bank_account_number`, `created_at`, `updated_at`) VALUES
-(1, 'restaurant_owner', 'Pasta Palace raman', 'raman A cozy Italian eatery with authentic pasta dishes', 'Pizza burger raman', NULL, 'testdg raman', 'New York raman', 'NY raman', '10001 raman', 'United States raman', 40.7127760, -74.0059740, 1000, '+1 (678) 861-1111', NULL, 'ramanpasta@gmail.com', '$2y$12$wgmroHJg3V1Exz2tZyTm0OG0EPv8GSPWIrXWuOKXbwOabk.S6GONG', 'https://www.pastapalace.comraman', '1022:00 AM', '12220:00 PM', 'ramanMonday, Tuesday, Wednesday, Thursday, Friday', 'Mario Rossiraman', '+1 212-555-0000', 'ramanmario@gmail.com', 111250.00, 111140.00, '111120 mins', 'on', NULL, '1730058354_671e9872373d3.jpg', 'inactive', 0, 'GST1234111111', '1111111', NULL, NULL, NULL, '2024-10-27 03:10:07', '2024-10-27 14:15:54');
+INSERT INTO `restaurants` (`id`, `role`, `name`, `description`, `speciality`, `type`, `priority`, `logo`, `address`, `city`, `state`, `postal_code`, `country`, `latitude`, `longitude`, `delivery_radius`, `phone`, `secondary_phone`, `email`, `password`, `website`, `opening_time`, `closing_time`, `days_of_operation`, `owner_name`, `owner_contact_number`, `owner_email`, `average_cost_for_per_person`, `delivery_fee`, `delivery_time`, `delivery_on_off`, `restaurant_images`, `featured_image`, `status`, `featured`, `tax_gst_number`, `fssai_number`, `bank_holder_name`, `ifsc_code`, `bank_account_number`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, 'restaurant_owner', 'Burger King', 'Burger King India Limited is the master franchisee for BURGER KING® in India, operating BURGER KING® restaurants nationwide. Burger King India opened its first restaurant in India in 2014 and it operates more than 290+ restaurants across India. The brand recently launched its own ordering Burger King India APP with great offers, exclusive deals and loyalty rewards to users. The company operates with multiple restaurants in Delhi NCR, Punjab, Rajasthan, Mumbai, Nashik, Pune, Bengaluru, Chennai, Hyderabad, Kerala, Gujarat, Dehradun, UP, Bhopal, Gwalior, and Bhubaneswar etc. The address of this restaurant is SCF 93, Gr & 1st Flr, Kumar Mega Mall, Mohali Stadium Road, Mohali, Punjab.', 'Pizza, Pasta, Noodles', 'subscription_based', 'high', NULL, 'SCF 93, Ground & 1st Floor, Kumar Mega Mall on Mohali Stadium Road', 'Mohali', 'Punjab', '160059', 'India', 40.7127760, -74.0059740, 10, '09321912739', '8775884999', 'burgerking@gmail.com', '$2y$12$crTTcslDPyY2A9rqzxwX.OhZdksUTIBmRzpxJaGtJv5nycx7/ARLq', 'https://www.burgerking.com', '10:00 AM', '12:00 PM', 'Monday-Sunday', 'Mario Rossi', '8775884999', 'mario@gmail.com', 200.00, 40.00, '20 mins', 'off', NULL, '1730099740_671f3a1c63e82.jpg', 'inactive', 0, 'GST1234567890', '23232', 'mario', '34324', '43424', NULL, '2024-10-28 01:45:40', '2024-10-28 02:30:03'),
+(2, 'restaurant_owner', 'Pizza hut', 'test', 'test', 'self', 'medium', NULL, 'test', 'test', 'test', 'test', 'test', 30.6862000, 76.7389000, 23, '54335', '435435', 'pizza@gmail.com', '$2y$12$JA2fWIdkfbRBbgqSm529ruD.h8QjV0jXvXAR.uSb/bgC7yKOnKJXm', 'https://pizzahut.com', '10:10AM', '8:00PM', 'Everyday', 'preet', '4545', 'preet@gmail.com', 100.00, 23.00, '30mins', 'off', NULL, NULL, 'inactive', 0, '434234', '43434', 'preet', '4343', '4234324', NULL, '2024-10-28 06:06:53', '2024-10-28 06:06:53');
 
 -- --------------------------------------------------------
 
@@ -415,11 +418,9 @@ CREATE TABLE IF NOT EXISTS `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('mjFLtkMTaEYi2pZGG19ldZeQmG6NkHdW6rVf2fhL', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36 Edg/130.0.0.0', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoidllJOWlBam55ZUVORVI2cFBEUzFNV3dxYnNISWg2THQ0emM2MUdSeCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDY6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9yZXN0YXVyYW50cy8xL2VkaXQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjM6InVybCI7YTowOnt9czo1MjoibG9naW5fYWRtaW5fNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO30=', 1730059387),
-('4EoQvkQN9GdjjEfZVZwAMSvkJ5mqhG34fWquvB6e', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiZWhUOXl6SG5WMjR6Wkp3U1dmY3JLMU5QMk1DdmtpOEt1WWdZNGZoZiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTc6ImxvZ2luX3Jlc3RhdXJhbnRfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MzoidXJsIjthOjE6e3M6ODoiaW50ZW5kZWQiO3M6NDA6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9kZWxpdmVyeS9kYXNoYm9hcmQiO319', 1730055262),
-('AzUU5krveRca21mNNLPWwgA019SsQxBViycUV9q3', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiU1hibUpGdnpUOXhaaGxkdUl3dVd3eHIyZGhPUWF5VnB4NFhtc0FRRSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDA6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9kZWxpdmVyeS9kYXNoYm9hcmQiO31zOjU1OiJsb2dpbl9kZWxpdmVyeV81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czo0MjoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL3Jlc3RhdXJhbnQvZGFzaGJvYXJkIjt9fQ==', 1730055277),
-('MmhwFTKtMKxfKFiR4QhcW163aE8MyrvOpcMLs7TG', NULL, '127.0.0.1', 'PostmanRuntime/7.42.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiNDhpelVQamdxYWRwWERFeXVmdndhSUMwWWVQNE42dDdTQm1rZWFKQiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1730055906),
-('nFdGQKAlLDcXiC4FbPLT4rBkCRU6wnYalLAOZzs3', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiY3V2SzAxVzJ3d3dvMDk4OEdmWFM2U2hrU0cySkVLeXFma2pvdVZOeiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1730053567);
+('T5Xh7lgrBSxmFybOGcNOwrh3wqV7y4zxKflj7BtL', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiaG9BRlhGYzhZVjI3WUtlb0VpWklrUW1OdElINUJYaUh6UVoxTW9uSCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NTU6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9yZXN0YXVyYW50L2Zvb2QtY2F0ZWdvcmllcy9jcmVhdGUiO31zOjU3OiJsb2dpbl9yZXN0YXVyYW50XzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjM6InVybCI7YToxOntzOjg6ImludGVuZGVkIjtzOjM5OiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYWRtaW4vcmVzdGF1cmFudHMiO319', 1730117983),
+('koHxL9XWuqtdtr0erSIuLAlGuFqn688EzQPqBbNK', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiRFNqR255TG55YnZWNUJkWm91d0x4U2lPU3NyNEo4SVhsMmhIckVodyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzk6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9yZXN0YXVyYW50cyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTI6ImxvZ2luX2FkbWluXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTt9', 1730115414),
+('gnqNKA5bjMnxPQI0zovWlwDeiZ1Np7gH57ZiMTnY', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiYkE2VUZRSWpTME9kYXJrOGdXMWlNam5PcE1PZllCMWpxMUZtVXpBSiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDg6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9yZXN0YXVyYW50L2Zvb2QtY2F0ZWdvcmllcyI7fXM6NTc6ImxvZ2luX3Jlc3RhdXJhbnRfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToyO30=', 1730117852);
 
 -- --------------------------------------------------------
 
@@ -450,7 +451,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `phone`, `address`, `is_active`, `role`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', 'admin@gmail.com', NULL, '$2y$12$pMAPO2OhotB9VBgnVgKRbuq0z3PKmssmdY0Sz0LSJCo8Xsa.e7b3u', '13333', 'addres', 1, 'admin', NULL, '2024-10-25 14:09:01', '2024-10-25 14:09:01');
+(1, 'Admin', 'admin@gmail.com', NULL, '$2y$12$j/1XGiFlkzjXRfMfjHvhZuBLdYUUw5sNkhl9hmmA5h6KR/4snJ.5a', '13333', 'addres', 1, 'admin', NULL, '2024-10-28 01:43:19', '2024-10-28 01:43:19');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
