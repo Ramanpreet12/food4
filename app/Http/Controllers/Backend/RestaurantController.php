@@ -17,6 +17,7 @@ use Illuminate\View\View;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class RestaurantController extends Controller
 {
@@ -336,8 +337,48 @@ class RestaurantController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+    // public function destroy(string $id)
+    // {
+    //     try {
+    //         if ($id) {
+    //             $get_restaurant  =  Restaurant::whereId($id)->first();
+    //             if ($get_restaurant) {
+    //                 delete_image($get_restaurant->featured_image, 'restaurants/featured');
+    //             }
+    //             $delete_record = $get_restaurant->delete();
+    //             if ( $delete_record) {
+    //                 return redirect()->back()->withInput()->with('error', 'Failed to delete restaurant: ');
+    //             }
+
+
+    //         }
+    //     } catch (\Exception $e) {
+    //         return redirect()->back()->withInput()->with('error', 'Failed to delete restaurant: '.$e->getMessage());
+    //     }
+
+
+    // }
+
     public function destroy(string $id)
-    {
-        dd($id);
+{
+    try {
+        // Attempt to find the restaurant by ID
+        $restaurant = Restaurant::findOrFail($id);
+
+        // Check if there is a featured image and delete it
+        if ($restaurant->featured_image) {
+            delete_image($restaurant->featured_image, 'restaurants/featured');
+        }
+
+        // Soft delete the restaurant record
+        $restaurant->delete();
+
+        // Redirect back with a success message
+        return redirect()->back()->with('success', 'Restaurant deleted successfully.');
+    } catch (ModelNotFoundException $e) {
+        return redirect()->back()->withInput()->with('error', 'Restaurant not found.');
+    } catch (\Exception $e) {
+        return redirect()->back()->withInput()->with('error', 'Failed to delete restaurant: ' . $e->getMessage());
     }
+}
 }

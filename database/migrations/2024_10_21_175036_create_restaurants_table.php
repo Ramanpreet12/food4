@@ -70,6 +70,7 @@ return new class extends Migration
             $table->string('ifsc_code')->nullable();
             $table->string('bank_account_number')->nullable();
             // $table->text('special_instructions')->nullable();          // Special Instructions (optional)
+            $table->softDeletes();
             $table->timestamps();
         });
     }

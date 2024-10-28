@@ -11,6 +11,8 @@
     <title>Dashboard | speedie app</title>
 
     <meta name="description" content="" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="{{ asset('/assets/img/favicon/favicon.ico') }}" />
@@ -42,6 +44,7 @@
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ asset('/assets/js/config.js') }}"></script>
+    @stack('styles')
   </head>
 
 <body>
@@ -67,9 +70,9 @@
                     @yield('content')
                     <!-- / Content -->
 
-                    
+
                     <!-- Footer -->
-                    
+
                     @include('admin.layout.footer')
                     <!-- / Footer -->
 
@@ -112,6 +115,12 @@
 
     <!-- Place this tag before closing body tag for github widget button. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    {{-- sweet alert --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer="defer"></script>
+    {{-- custom.js --}}
+    <script src="{{ asset('backend/custom.js') }}"></script>
+    @stack('script')
 </body>
 
 </html>

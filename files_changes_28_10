@@ -1,0 +1,10 @@
+# changes for restraunt delete with swal and filter UI for admin
+#       modified:   app/Http/Controllers/Backend/RestaurantController.php
+#       modified:   app/Models/Restaurant.php
+#       modified:   database/migrations/2024_10_21_175036_create_restaurants_table.php
+#       modified:   resources/views/admin/layout/layout.blade.php
+#       modified:   resources/views/admin/layout/sidebar.blade.php
+#       modified:   resources/views/admin/restaurant/index.blade.php
+#       files_changes_28_10
+#       public/backend/
+#       custom.js

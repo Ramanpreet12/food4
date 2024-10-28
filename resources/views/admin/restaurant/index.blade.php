@@ -80,9 +80,12 @@
                                             <div class="dropdown-menu">
                                                 <a class="dropdown-item" href="{{ route('admin.restaurants.edit', $restaurant->id) }}"><i
                                                         class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                <a class="dropdown-item" href="javascript:void(0);"><i
+                                                <a class="dropdown-item" href="javascript:void(0);" onclick="confirmDelete('{{ route('admin.restaurants.destroy', $restaurant->id) }}')"><i
                                                         class="bx bx-trash me-1"></i>
                                                     Delete</a>
+                                                    {{-- <button class="btn btn-danger" onclick="confirmDelete('{{ route('admin.restaurants.destroy', $restaurant->id) }}')">
+                                                        Delete
+                                                    </button> --}}
                                             </div>
                                         </div>
                                     </td>
