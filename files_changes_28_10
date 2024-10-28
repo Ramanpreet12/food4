@@ -8,3 +8,17 @@
 #       files_changes_28_10
 #       public/backend/
 #       custom.js
+
+# restaurant dashboard setup
+#     modified:   app/Http/Controllers/Backend/RestaurantController.php
+#         deleted:    resources/views/admin/restaurant/auth/login.blade.php
+#         deleted:    resources/views/admin/restaurant/create.blade.php
+#         deleted:    resources/views/admin/restaurant/dashboard.blade.php
+#         deleted:    resources/views/admin/restaurant/edit.blade.php
+#         deleted:    resources/views/admin/restaurant/index.blade.php
+#         modified:   routes/web.php
+
+# Untracked files:
+#   (use "git add <file>..." to include in what will be committed)
+#         resources/views/admin/restaurants/
+#         resources/views/restaurantOwner/

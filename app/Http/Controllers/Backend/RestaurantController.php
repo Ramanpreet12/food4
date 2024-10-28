@@ -87,12 +87,14 @@ class RestaurantController extends Controller
                 ->withInput($request->except('password'));
         }
 
-        return view('admin.restaurant.auth.login');
+        // return view('admin.restaurant.auth.login');
+        return view('restaurantOwner.login');
     }
 
     //dashboard
     public function dashboard(){
-        return view('admin.restaurant.dashboard');
+        // return view('admin.restaurant.dashboard');
+        return view('restaurantOwner.dashboard');
     }
 
     public function logout(Request $request)
@@ -109,7 +111,7 @@ class RestaurantController extends Controller
     public function index()
     {
         $restaurants = Restaurant::all();
-        return view('admin.restaurant.index', compact('restaurants'));
+        return view('admin.restaurants.index', compact('restaurants'));
     }
 
     /**
@@ -117,7 +119,7 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-        return view('admin.restaurant.create');
+        return view('admin.restaurants.create');
     }
 
 
@@ -247,7 +249,7 @@ class RestaurantController extends Controller
     public function edit(string $id)
     {
         $restaurant = Restaurant::find($id);
-        return view('admin.restaurant.edit', compact('restaurant'));
+        return view('admin.restaurants.edit', compact('restaurant'));
     }
 
     /**

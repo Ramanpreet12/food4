@@ -51,6 +51,7 @@ Route::middleware(['auth:admin', 'admin'])->group(function () {
     });
 });
 
+//Protected routes for restaurant owner
 Route::middleware(['auth:restaurant', 'restaurant'])->group(function () {
     Route::prefix('restaurant')->name('restaurant.')->group(function () {
         Route::get('/dashboard', [RestaurantController::class, 'dashboard'])->name('dashboard');
@@ -76,4 +77,4 @@ Route::middleware(['auth:web', 'customer'])->group(function () {
     });
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
