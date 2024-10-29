@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\AdminController;
 use App\Http\Controllers\Api\CustomerController;
 use App\Http\Controllers\Api\DeliveryController;
 use App\Http\Controllers\Api\RestaurantController;
+use App\Http\Controllers\Api\FoodCategoryApiController;
 
 // Passport-protected route to fetch authenticated user data
 Route::middleware('auth:api')->get('/user', function (Request $request) {
@@ -25,7 +26,7 @@ Route::post('/admin/login', [AdminController::class, 'login'])
 Route::post('/restaurant/login', [RestaurantController::class, 'restaurantLoginApi'])
     ->name('restaurant.login');
 
-//4. public delivery 
+//4. public delivery
 
 Route::post('/delivery/registrationStore', [DeliveryController::class, 'deliveryRegistrationApi'])
     ->name('delivery.registrationStore');
@@ -81,13 +82,19 @@ Route::middleware('auth:api')->group(function () {
 
 //3. //10:53 Protected routes Restaurant API routes
 // Restaurant API routes
-Route::middleware(['auth:restaurant-api', 'restaurant'])->prefix('restaurant')->group(function () {
+Route::middleware(['restaurant'])->prefix('restaurant')->group(function () {
+// Route::middleware(['auth:restaurant-api', 'restaurant'])->prefix('restaurant')->group(function () {
     Route::get('/dashboard', [RestaurantController::class, 'dashboard']);
     Route::get('/profile', [RestaurantController::class, 'profile']);
+
+    //Menu Management : restaurant/food-categories
+    Route::get('/food-categories' , [FoodCategoryApiController::class, 'getFoodCategories']);
+    Route::post('/store-food-categories' , [FoodCategoryApiController::class, 'storeFoodCategories']);
+    Route::put('/update-food-categories/{id}' , [FoodCategoryApiController::class, 'updateFoodCategories']);
 });
 
 //4.  Delivery API routes
-Route::middleware(['auth:delivery-api', 'delivery'])->prefix('delivery')->group(function () {
+Route::middleware(['delivery'])->prefix('delivery')->group(function () {
     Route::get('/dashboard', [DeliveryController::class, 'dashboard']);
     Route::get('/profile', [DeliveryController::class, 'profile']);
 });

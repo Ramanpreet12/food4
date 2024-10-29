@@ -41,15 +41,13 @@ class FoodCategoryController extends Controller
 
     public function store(Request $request)
     {
-        // 1. Validate the request
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // 2MB Max
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
             'status' => 'boolean',
         ]);
 
         try {
-            // 2. Get the authenticated restaurant
             $restaurant = Auth::guard('restaurant')->user();
 
             if (!$restaurant) {
@@ -57,8 +55,6 @@ class FoodCategoryController extends Controller
                     ->with('error', 'Restaurant not found. Please login again.')
                     ->withInput();
             }
-
-            // 3. Handle image upload if present
             $foodCatImg = null;
             if ($request->hasFile('image')) {
                 try {
@@ -70,15 +66,9 @@ class FoodCategoryController extends Controller
                         ->withInput();
                 }
             }
-
-            // 4. Add restaurant_id to validated data
             $validated['restaurant_id'] = $restaurant->id;
-            $validated['status'] = 1; // true
-
-            // 5. Create the food category
+            $validated['status'] = 1;
             FoodCategory::create($validated);
-
-            // 6. Redirect with success message
             return redirect()->back()
                 ->with('success', 'Food category created successfully');
         } catch (\Exception $e) {
