@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\CustomerController;
 use App\Http\Controllers\Api\DeliveryController;
 use App\Http\Controllers\Api\RestaurantController;
 use App\Http\Controllers\Api\FoodCategoryApiController;
+use App\Http\Controllers\Api\MenuItemApiController;
 
 // Passport-protected route to fetch authenticated user data
 Route::middleware('auth:api')->get('/user', function (Request $request) {
@@ -95,6 +96,9 @@ Route::middleware(['restaurant'])->prefix('restaurant')->group(function () {
     Route::get('/edit-food-category/{id}' , [FoodCategoryApiController::class, 'editFoodCategory']);
     Route::post('/update-food-category/{id}' , [FoodCategoryApiController::class, 'updateFoodCategory']);
     Route::delete('/delete-food-category/{id}' , [FoodCategoryApiController::class, 'deleteFoodCategory']);
+
+    // menu-items
+    Route::get('/menu-items' , [MenuItemApiController::class, 'getMenuItems']);
 
 });
 

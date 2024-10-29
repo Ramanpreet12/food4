@@ -31,3 +31,11 @@
 #         app/Models/MenuItem.php
 #         database/migrations/2024_10_29_102449_create_menu_items_table.php
 #         resources/views/restaurantOwner/menuItem/
+
+
+# get menu items for api
+# modified:   routes/api.php
+
+# Untracked files:
+#   (use "git add <file>..." to include in what will be committed)
+#         app/Http/Controllers/Api/MenuItemApiController.php
