@@ -10,3 +10,7 @@
 
 # modified:   app/Http/Controllers/Api/FoodCategoryApiController.php
 #         modified:   routes/api.php
+
+# optimizes
+#  modified:   app/Http/Controllers/Api/FoodCategoryApiController.php
+#         modified:   app/helper.php
