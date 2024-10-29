@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\DeliveryController;
 use App\Http\Controllers\Backend\CustomerController;
 use App\Http\Controllers\Backend\RestaurantController;
 use App\Http\Controllers\Backend\FoodCategoryController;
+use App\Http\Controllers\Backend\MenuItemController;
 use Illuminate\Support\Facades\Route;
 
 // Public homepage only
@@ -61,6 +62,7 @@ Route::middleware(['auth:restaurant', 'restaurant'])->group(function () {
 
         //Menu Management
         Route::resource('food-categories', FoodCategoryController::class);
+        Route::resource('menu-items', MenuItemController::class);
     });
 });
 

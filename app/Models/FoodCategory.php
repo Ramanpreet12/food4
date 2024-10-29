@@ -10,12 +10,6 @@ class FoodCategory extends Model
 {
     use HasFactory, SoftDeletes;
 
-    // protected $fillable = [
-    //     'name',
-    //     'image',
-    //     'status',
-    //     'restaurant_id'
-    // ];
     protected $guarded = ['id'];
 
     /**
@@ -24,6 +18,11 @@ class FoodCategory extends Model
     public function restaurant()
     {
         return $this->belongsTo(Restaurant::class);
+    }
+
+    public function menuItems()
+    {
+        return $this->hasMany(MenuItem::class, 'category_id');
     }
 
     /**

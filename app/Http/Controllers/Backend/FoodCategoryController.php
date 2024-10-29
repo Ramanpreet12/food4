@@ -114,22 +114,16 @@ class FoodCategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // 1. Validate the request
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif', // 2MB Max
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
             'status' => 'boolean',
         ]);
 
         try {
-            // 2. Get the authenticated restaurant
             $restaurant = Auth::guard('restaurant')->user();
-
-            // 3. Find the category and ensure it belongs to the restaurant
             $category = FoodCategory::where('restaurant_id', $restaurant->id)
                 ->findOrFail($id);
-
-            // 4. Handle image upload if present
             if ($request->hasFile('image')) {
                 try {
                     // Delete old image if exists
@@ -147,10 +141,8 @@ class FoodCategoryController extends Controller
                 }
             }
 
-            // 5. Update the category
             $category->update($validated);
 
-            // 6. Redirect with success message
             return redirect()->route('restaurant.food-categories.index')
                 ->with('success', 'Food category updated successfully');
         } catch (\Exception $e) {
