@@ -89,8 +89,13 @@ Route::middleware(['restaurant'])->prefix('restaurant')->group(function () {
 
     //Menu Management : restaurant/food-categories
     Route::get('/food-categories' , [FoodCategoryApiController::class, 'getFoodCategories']);
-    Route::post('/store-food-categories' , [FoodCategoryApiController::class, 'storeFoodCategories']);
-    Route::put('/update-food-categories/{id}' , [FoodCategoryApiController::class, 'updateFoodCategories']);
+    Route::post('/store-food-category' , [FoodCategoryApiController::class, 'storeFoodCategory']);
+    // Route::put('/update-food-categories/{id}' , [FoodCategoryApiController::class, 'updateFoodCategories'])
+    // ->middleware(\Illuminate\Routing\Middleware\HandlePutFormData::class);;
+    Route::get('/edit-food-category/{id}' , [FoodCategoryApiController::class, 'editFoodCategory']);
+    Route::post('/update-food-category/{id}' , [FoodCategoryApiController::class, 'updateFoodCategory']);
+    Route::delete('/delete-food-category/{id}' , [FoodCategoryApiController::class, 'deleteFoodCategory']);
+
 });
 
 //4.  Delivery API routes
