@@ -37,7 +37,7 @@ Route::middleware('guest:delivery')->group(function () {
 Route::middleware('guest:web')->group(function () {
     Route::prefix('user')->name('user.')->controller(CustomerController::class)->group(function () {
         Route::get('/register', 'showRegistrationForm')->name('register');
-        Route::post('/register', 'register');
+        Route::post('/user_register', 'user_register')->name('user_register');
         Route::get('/login', 'showLoginForm')->name('login');
         Route::post('/login', 'login');
     });

@@ -143,7 +143,7 @@ class DeliveryController extends Controller
         ]
     ], 200);
 }
-    
+
     public function dashboard()
     {
         return 'delivery boy';

@@ -128,17 +128,17 @@
                         <div class="text-truncate" data-i18n="Without navbar">Food Items</div>
                     </a>
                 </li>
-                <li class="menu-item">
+                {{-- <li class="menu-item">
                     <a href="layouts-fluid.html" class="menu-link">
                         <div class="text-truncate" data-i18n="Fluid">Menu status</div>
                     </a>
-                </li>
+                </li> --}}
 
-                <li class="menu-item">
+                {{-- <li class="menu-item">
                     <a href="layouts-fluid.html" class="menu-link">
                         <div class="text-truncate" data-i18n="Fluid">Stock Management</div>
                     </a>
-                </li>
+                </li> --}}
 
             </ul>
         </li>
@@ -177,7 +177,7 @@
         </li>
 
 
-        <li class="menu-item">
+        {{-- <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-layout"></i>
                 <div class="text-truncate" data-i18n="Layouts">Financial Management</div>
@@ -208,9 +208,9 @@
 
 
             </ul>
-        </li>
+        </li> --}}
 
-        <li class="menu-item">
+        {{-- <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-layout"></i>
                 <div class="text-truncate" data-i18n="Layouts">Reports & Analytics Management</div>
@@ -240,7 +240,7 @@
 
 
             </ul>
-        </li>
+        </li> --}}
 
 
         <li class="menu-item">

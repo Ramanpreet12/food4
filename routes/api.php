@@ -15,9 +15,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-//1. Public routes
+//0. Public routes
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+
+//1. customer routes
+Route::post('/user/registrationStore', [CustomerController::class, 'registrationStore']);
+// Route::post('/login', [AuthController::class, 'login']);
 
 //2. public  Admin routes
 Route::post('/admin/login', [AdminController::class, 'login'])
