@@ -45,6 +45,9 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            //for otp
+            'otp_expire_at' => 'datetime',
+            'is_otp_verified' => 'boolean',
         ];
     }
 
@@ -53,17 +56,17 @@ class User extends Authenticatable
      {
          return $this->role === 'admin';
      }
- 
+
      public function isRestaurantOwner(): bool
      {
          return $this->role === 'restaurant_owner';
      }
- 
+
      public function isCustomer(): bool
      {
          return $this->role === 'customer';
      }
- 
+
      public function isDelivery(): bool
      {
          return $this->role === 'delivery';

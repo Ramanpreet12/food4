@@ -38,8 +38,15 @@ Route::middleware('guest:web')->group(function () {
     Route::prefix('user')->name('user.')->controller(CustomerController::class)->group(function () {
         Route::get('/register', 'showRegistrationForm')->name('register');
         Route::post('/user_register', 'user_register')->name('user_register');
+        // Route::post('send-otp',  'sendOTP');
+
+        // Route::get('/login', 'showLoginForm')->name('login');
+        // Route::post('/login', 'login');
+
         Route::get('/login', 'showLoginForm')->name('login');
-        Route::post('/login', 'login');
+        Route::post('/send-otp', 'sendOTP')->name('send.otp');
+        Route::post('/verify-otp', 'verifyOTPAndLogin')->name('verify.otp');
+
     });
 });
 
@@ -75,7 +82,7 @@ Route::middleware(['auth:delivery', 'delivery'])->group(function () {
 });
 
 Route::middleware(['auth:web', 'customer'])->group(function () {
-    Route::prefix('customer')->name('customer.')->group(function () {
+    Route::prefix('user')->name('user.')->group(function () {
         Route::get('/dashboard', [CustomerController::class, 'dashboard'])->name('dashboard');
         Route::get('/profile', [CustomerController::class, 'profile'])->name('profile');
         Route::get('/restaurants', [CustomerController::class, 'listRestaurants'])->name('restaurants');
