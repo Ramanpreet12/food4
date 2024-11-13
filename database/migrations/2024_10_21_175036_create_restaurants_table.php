@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('speciality')->nullable();                     // Cuisine speciality
             $table->enum('type', ['subscription_based', 'self'])->nullable();                     // Cuisine speciality
             $table->enum('priority', ['high', 'medium' , 'low'])->nullable();                     // Cuisine speciality
+            $table->enum('pureVeg', ['yes', 'no'])->nullable();                     // Cuisine speciality
+            $table->enum('deliveryIs', ['yes', 'no'])->nullable();                     // Cuisine speciality
             // $table->string('category');                     // Cuisine Category
             $table->string('logo')->nullable();             // Restaurant Logo
             $table->text('address');                      // Restaurant Address

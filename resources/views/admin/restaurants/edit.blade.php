@@ -59,9 +59,9 @@
                                     <div class="mb-6">
                                         <label class="form-label" for="type">Type</label>
                                         <select name="type" id="type" class="form-control">
-                                            <option value="subscription_based">Type1</option>
+                                            <option value="subscription_based" @if($restaurant->type ==  'subscription_based') selected @endif>Type1</option>
                                             {{-- <option value="active"  @if ($restaurant->type == 'active') selected @endif>Active</option> --}}
-                                            <option value="self">Type 2</option>
+                                            <option value="self" @if($restaurant->type ==  'self') selected @endif>Type 2</option>
                                         </select>
 
                                         @error('type')
@@ -76,12 +76,43 @@
                                     <div class="mb-6">
                                         <label class="form-label" for="priority">Priority</label>
                                             <select name="priority" id="priority" class="form-control">
-                                                <option value="high">high</option>
-                                                <option value="medium">medium</option>
-                                                <option value="low">low</option>
+                                                <option value="high" @if($restaurant->priority ==  'high') selected @endif>high</option>
+                                                <option value="medium" @if($restaurant->priority ==  'medium') selected @endif>medium</option>
+                                                <option value="low" @if($restaurant->priority ==  'low') selected @endif>low</option>
                                             </select>
                                     </div>
                                     @error('priority')
+                                            <span class="text-danger"> {{ $message }}</span>
+                                        @enderror
+                                </div>
+
+                                <div class="form-group col-6">
+                                    <div class="mb-6">
+                                        <label class="form-label" for="pureVeg">Pure Veg</label>
+
+                                            <select name="pureVeg" id="pureVeg" class="form-control">
+                                                <option value="yes" @if($restaurant->pureVeg ==  'yes') selected @endif>Yes</option>
+                                                <option value="no" @if($restaurant->pureVeg ==  'no') selected @endif>No</option>
+                                            </select>
+                                    </div>
+                                    @error('pureVeg')
+                                            <span class="text-danger"> {{ $message }}</span>
+                                        @enderror
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="form-group col-6">
+                                    <div class="mb-6">
+                                        <label class="form-label" for="deliveryIs">Delivery Is</label>
+
+                                            <select name="deliveryIs" id="deliveryIs" class="form-control">
+                                                <option value="yes" @if($restaurant->deliveryIs ==  'yes') selected @endif>Yes</option>
+                                                <option value="no" @if($restaurant->deliveryIs ==  'no') selected @endif>No</option>
+                                            </select>
+                                    </div>
+                                    @error('deliveryIs')
                                             <span class="text-danger"> {{ $message }}</span>
                                         @enderror
                                 </div>
@@ -98,6 +129,8 @@
                                     </div>
                                 </div>
                             </div>
+
+
 
                             <hr>
 

@@ -174,7 +174,8 @@ class RestaurantController extends Controller
                 'bank_account_number' => $request->bank_account_number,
                 'type' => $request->type,
                 'priority' => $request->priority,
-
+                'pureVeg' => $request->pureVeg,
+                'deliveryIs' => $request->deliveryIs,
                 // 'logo' => $logoFilename,
                 // 'restaurant_images' => $restaurantImage,
                 'featured_image' => $featuredImage,

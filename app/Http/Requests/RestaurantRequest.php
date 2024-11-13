@@ -52,6 +52,9 @@ class RestaurantRequest extends FormRequest
             'bank_account_number' => 'nullable',
             'type' => 'nullable',
             'priority' => 'nullable',
+            'pureVeg' => 'nullable',
+            'deliveryIs' => 'nullable',
+
         ];
 
          // Modify unique validation for update

@@ -85,8 +85,42 @@
                                         @enderror
                                 </div>
 
+                                <div class="form-group col-6">
+                                    <div class="mb-6">
+                                        <label class="form-label" for="pureVeg">Pure Veg</label>
+
+                                            <select name="pureVeg" id="pureVeg" class="form-control">
+                                                <option value="yes">Yes</option>
+                                                <option value="no">No</option>
+                                            </select>
+                                    </div>
+                                    @error('pureVeg')
+                                            <span class="text-danger"> {{ $message }}</span>
+                                        @enderror
+                                </div>
+
+
                             </div>
 
+                            <div class="row">
+                                <div class="form-group col-6">
+                                    <div class="mb-6">
+                                        <label class="form-label" for="deliveryIs">Delivery Is</label>
+
+                                            <select name="deliveryIs" id="deliveryIs" class="form-control">
+                                                <option value="yes">Yes</option>
+                                                <option value="no">No</option>
+                                            </select>
+                                    </div>
+                                    @error('deliveryIs')
+                                            <span class="text-danger"> {{ $message }}</span>
+                                        @enderror
+                                </div>
+
+
+
+
+                            </div>
 
                             <hr>
 
