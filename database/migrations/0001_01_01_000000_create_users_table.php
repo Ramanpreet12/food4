@@ -26,8 +26,8 @@ return new class extends Migration
             $table->enum('role', ['admin', 'restaurant_owner', 'customer', 'delivery'])->default('customer');
             // $table->string('role')->default('customer');  // Default role:
             $table->string('otp')->nullable();
-            $table->timestamp('otp_expire_at')->nullable()->after('otp');
-            $table->boolean('is_otp_verified')->default(false)->after('otp_expire_at');
+            $table->timestamp('otp_expire_at')->nullable();
+            $table->boolean('is_otp_verified')->default(false);
 
             $table->rememberToken();
             $table->timestamps();

@@ -21,6 +21,9 @@ Route::post('/login', [AuthController::class, 'login']);
 
 //1. customer routes
 Route::post('/user/registrationStore', [CustomerController::class, 'registrationStore']);
+Route::post('/user/send-otp', [CustomerController::class, 'sendOTP']);
+Route::post('/user/verify-otp', [CustomerController::class, 'verifyOTPAndLogin']);
+
 // Route::post('/login', [AuthController::class, 'login']);
 
 //2. public  Admin routes
@@ -55,7 +58,7 @@ Route::middleware('auth:api')->group(function () {
 
     // User/Customer routes
     Route::middleware('customer')->group(function () {
-        Route::get('/dashboard', [CustomerController::class, 'dashboard']);
+        Route::get('/user/dashboard', [CustomerController::class, 'dashboard']);
         Route::get('/profile', [CustomerController::class, 'profile']);
     });
 
@@ -72,38 +75,26 @@ Route::middleware('auth:api')->group(function () {
         Route::put('/restaurants/update/{id}', [RestaurantController::class, 'update']);
     });
 
-    // restaurant owner Routes
-    //  Route::middleware('restaurant')->prefix('restaurant')->group(function () {
-    //     Route::get('/resDashboard', [RestaurantController::class, 'dashboard']);
-    //     Route::get('/profile', [RestaurantController::class, 'profile']);
-    // });
-
-    // Delivery Boy Routes
-    // Route::middleware('delivery')->prefix('delivery')->group(function () {
-    //     Route::get('/dashboard', [DeliveryController::class, 'dashboard']);
-    //     Route::get('/profile', [DeliveryController::class, 'profile']);
-    // });
 });
 
 //3. //10:53 Protected routes Restaurant API routes
 // Restaurant API routes
 Route::middleware(['restaurant'])->prefix('restaurant')->group(function () {
-// Route::middleware(['auth:restaurant-api', 'restaurant'])->prefix('restaurant')->group(function () {
+    // Route::middleware(['auth:restaurant-api', 'restaurant'])->prefix('restaurant')->group(function () {
     Route::get('/dashboard', [RestaurantController::class, 'dashboard']);
     Route::get('/profile', [RestaurantController::class, 'profile']);
 
     //Menu Management : restaurant/food-categories
-    Route::get('/food-categories' , [FoodCategoryApiController::class, 'getFoodCategories']);
-    Route::post('/store-food-category' , [FoodCategoryApiController::class, 'storeFoodCategory']);
+    Route::get('/food-categories', [FoodCategoryApiController::class, 'getFoodCategories']);
+    Route::post('/store-food-category', [FoodCategoryApiController::class, 'storeFoodCategory']);
     // Route::put('/update-food-categories/{id}' , [FoodCategoryApiController::class, 'updateFoodCategories'])
     // ->middleware(\Illuminate\Routing\Middleware\HandlePutFormData::class);;
-    Route::get('/edit-food-category/{id}' , [FoodCategoryApiController::class, 'editFoodCategory']);
-    Route::post('/update-food-category/{id}' , [FoodCategoryApiController::class, 'updateFoodCategory']);
-    Route::delete('/delete-food-category/{id}' , [FoodCategoryApiController::class, 'deleteFoodCategory']);
+    Route::get('/edit-food-category/{id}', [FoodCategoryApiController::class, 'editFoodCategory']);
+    Route::post('/update-food-category/{id}', [FoodCategoryApiController::class, 'updateFoodCategory']);
+    Route::delete('/delete-food-category/{id}', [FoodCategoryApiController::class, 'deleteFoodCategory']);
 
     // menu-items
-    Route::get('/menu-items' , [MenuItemApiController::class, 'getMenuItems']);
-
+    Route::get('/menu-items', [MenuItemApiController::class, 'getMenuItems']);
 });
 
 //4.  Delivery API routes

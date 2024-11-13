@@ -24,10 +24,10 @@ class CustomerRegisterRequest extends FormRequest
         return [
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
-            'phone' => 'required|max:20',
+            'phone' => 'required|max:20|unique:users,phone',
             'altNumber' => 'nullable|max:20',
             'gender' => 'required|in:male,female,other',
-            'image' => 'required|image|mimes:jpg,jpeg,png'
+            'image' => 'nullable|image|mimes:jpg,jpeg,png'
         ];
     }
 }

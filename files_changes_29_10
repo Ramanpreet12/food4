@@ -1,41 +1,37 @@
-#         modified:   app/Http/Controllers/Backend/FoodCategoryController.php
-#         deleted:    files_changes_28_10
-#         modified:   routes/api.php
-
-# Untracked files:
-#   (use "git add <file>..." to include in what will be committed)
-#         app/Http/Controllers/Api/FoodCategoryApiController.php
-#         files_changes_29_10
-
-
-# modified:   app/Http/Controllers/Api/FoodCategoryApiController.php
-#         modified:   routes/api.php
-
-# optimizes
-#  modified:   app/Http/Controllers/Api/FoodCategoryApiController.php
-#         modified:   app/helper.php
-
-
-# menu item crud done for web
-# (use "git restore <file>..." to discard changes in working directory)
-#         modified:   app/Http/Controllers/Backend/FoodCategoryController.php
+# # 30-10-2024 total 16 files changes : Food category done in api and web both, but menu item is done on only web and wokring in api
+# modified:   app/Http/Controllers/Backend/FoodCategoryController.php
 #         modified:   app/Models/FoodCategory.php
 #         modified:   app/Models/Restaurant.php
+#         modified:   app/helper.php
 #         modified:   resources/views/restaurantOwner/layout/sidebar.blade.php
+#         modified:   routes/api.php
 #         modified:   routes/web.php
 
 # Untracked files:
 #   (use "git add <file>..." to include in what will be committed)
+#         app/Http/Controllers/Api/FoodCategoryApiController.php
+#         app/Http/Controllers/Api/MenuItemApiController.php
 #         app/Http/Controllers/Backend/MenuItemController.php
 #         app/Http/Requests/MenuItemRequest.php
 #         app/Models/MenuItem.php
-#         database/migrations/2024_10_29_102449_create_menu_items_table.php
+#         database/migrations/2024_10_29_175559_create_menu_items_table.php
 #         resources/views/restaurantOwner/menuItem/
 
+# Optimizes get funciton for
+    # modified:   app/Http/Controllers/Api/FoodCategoryApiController.php
+    #     modified:   app/Http/Controllers/Api/MenuItemApiController.php
 
-# get menu items for api
-# modified:   routes/api.php
+# Restaurant Owner Credentials
+# Please share these credentials with the restaurant owner:
 
-# Untracked files:
-#   (use "git add <file>..." to include in what will be committed)
-#         app/Http/Controllers/Api/MenuItemApiController.php
+# Email: admin@gmail.com
+
+# Password: hoN=DAF&9^o*
+
+# Note: This password will only be shown once.
+
+
+#  RuntimeException
+# Personal access client not found. Please create one.
+# run this then
+# php artisan passport:client --personal

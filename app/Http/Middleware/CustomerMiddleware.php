@@ -15,33 +15,11 @@ class CustomerMiddleware
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    // public function handle(Request $request, Closure $next): Response
-    // {
-    //     // return $next($request);
-    //     // if (!Auth::check() || Auth::user()->role !== 'customer') {
-    //     //     abort(403, 'Unauthorized access.');
-    //     // }
-    
-    //     // return $next($request);
-
-
-    //     if (Auth::check() && Auth::user()->role === 'customer') {
-    //         return $next($request);
-    //     }
-    //      // Check if it's an API request
-    //     if ($request->expectsJson()|| $request->is('api/*')) {
-    //         return response()->json([
-    //             'success' => false,
-    //             'message' => 'Unauthorized. This endpoint is only accessible to customers.',
-    //         ], 403);
-    //     }
-        
-    //     abort(403, 'This section is only accessible to customers.');
-    // }
 
     // public function handle(Request $request, Closure $next): Response
     // {
-    //     if (!Auth::guard('web')->check() || Auth::guard('web')->user()->role !== 'customer') {
+    //     // Check if user is logged in and using web guard
+    //     if (!Auth::guard('web')->check()) {
     //         if ($request->expectsJson() || $request->is('api/*')) {
     //             return response()->json([
     //                 'success' => false,
@@ -50,33 +28,54 @@ class CustomerMiddleware
     //         }
     //         return redirect()->route('login');
     //     }
+
+    //     // Ensure user is actually a customer
+    //     if (Auth::guard('web')->user()->role !== 'customer') {
+    //         Auth::guard('web')->logout();
+    //         if ($request->expectsJson() || $request->is('api/*')) {
+    //             return response()->json([
+    //                 'success' => false,
+    //                 'message' => 'Unauthorized. Customer access only.',
+    //             ], 403);
+    //         }
+    //         return redirect()->route('login')
+    //             ->with('error', 'Unauthorized access attempt.');
+    //     }
+
     //     return $next($request);
     // }
 
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next)
     {
-        // Check if user is logged in and using web guard
-        if (!Auth::guard('web')->check()) {
-            if ($request->expectsJson() || $request->is('api/*')) {
+        if ($request->is('api/*')) {
+            // API routes
+            if (!Auth::guard('api')->check()) {
                 return response()->json([
-                    'success' => false,
-                    'message' => 'Unauthorized. Customer access only.',
-                ], 403);
+                    'status' => false,
+                    'message' => 'Unauthorized. Please login as customer.',
+                ], 401);
             }
-            return redirect()->route('login');
-        }
 
-        // Ensure user is actually a customer
-        if (Auth::guard('web')->user()->role !== 'customer') {
-            Auth::guard('web')->logout();
-            if ($request->expectsJson() || $request->is('api/*')) {
+            $user = Auth::guard('api')->user();
+
+            // Check both guard and token scope
+            if ($user->role !== 'customer' || !$request->user('api')->tokenCan('customer-access')) {
                 return response()->json([
-                    'success' => false,
-                    'message' => 'Unauthorized. Customer access only.',
+                    'status' => false,
+                    'message' => 'Access denied. customer personnel only.',
                 ], 403);
             }
-            return redirect()->route('login')
-                ->with('error', 'Unauthorized access attempt.');
+        } else {
+            // Web routes remain unchanged
+            if (!Auth::guard('web')->check()) {
+                return redirect()->route('user.login');
+            }
+
+            if (Auth::guard('web')->user()->role !== 'cutomer') {
+                Auth::guard('web')->logout();
+                return redirect()->route('user.login')
+                    ->with('error', 'Unauthorized access attempt.');
+            }
         }
 
         return $next($request);
